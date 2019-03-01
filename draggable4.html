@@ -1,0 +1,213 @@
+<html>
+    <head>
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <style>
+                    .movablecard{
+                        border:1px solid black;
+                        height:300px;
+                        width:300px;
+                    }
+                    .headerdiv{
+                        height: 50px;
+                        background-color:#232C33;
+                    }
+                    .column1{
+                        width:30%;
+                        height: 50vh;
+                    }
+
+  .mystyle {
+                      
+    height: 291px;
+    padding: 25px;
+    margin-left: 19px;
+    background-color: #D8CBC7;
+    
+    text-align: center;
+    font-size: 25px;
+    box-sizing: border-box;
+    margin-left: 314px;
+    margin-top: -245px;
+    border-radius: 8px;
+
+}
+#myDIV{
+  display:none;
+}
+i{
+    color:black;
+     margin-left: -10px;
+     padding-top: 15px;
+} 
+
+#movablearea{
+  width:100vw;
+}
+                </style>
+    </head>
+    
+    <body>
+        <div class="container-fluid" id="movablearea" >
+
+             <div class="row">
+                  <div class="column1">  
+                    
+                      <div class="movablecard" id="card1"   >
+                        <div class="headerdiv">
+
+                          </div>
+                          <canvas id="myCanvas" width="300" height="200"></canvas>
+                          <div id="myDIV" class="mystyle">
+                              <i class="fa fa-file fa-1x"></i>
+                              <i class="fas fa-thumbtack"></i>
+                              <i class="fa fa-indent fa-1x"></i>
+                              <i class="far fa-bookmark"></i>
+                              <i class="fas fa-trash-alt"></i>
+                      </div> 
+                      </div>   
+                      
+                  </div>   
+                   <div class="column1">  
+                   </div>  
+                   <div class="column1">
+                         
+                    
+                                <div class="movablecard" id="card2"   >
+                                  <div class="headerdiv">
+          
+                                    </div>
+                                    <canvas id="drawing" width="200" height="200"></canvas>
+                                </div>   
+                           
+                       
+                    </div>  
+                           
+                    
+                        
+              </div>      
+             
+          <div class="row">
+              <div class="column1">  
+                    
+                      <div class="movablecard" id="card3"   >
+                              <div class="headerdiv">
+      
+                                </div>
+                                 <canvas id="canvasrect" width="298" height="247" >
+                                  Your browser does not support the HTML5 canvas tag.</canvas>
+                            </div>  
+                  
+              
+              </div>   
+               
+              <div class="column1">  
+                </div>  
+                   
+              <div class="column1">  
+                      
+                           
+                          
+                      
+            </div>         
+                               
+           </div>
+                        
+                    
+              
+             
+        </div>     
+            
+            <script>
+
+/*dragging*/
+$( function() {
+    $( ".movablecard" ).draggable();
+    $( ".column1" ).droppable({
+      drop: function( event, ui ) {
+      
+          
+      }
+    });
+  } );
+
+//  toolbar hide               
+  $("#movablearea").click(function(){
+  $("#myDIV").hide();
+});
+//toolbar hide2
+// jQuery( function() {
+//   jQuery('.column1').click(function(e) {
+//     if (e.target.id == 'card2' ) {
+//       alert("Inside div");
+//     } else {
+//       alert("Outside div");
+//     }
+//   });
+// } );
+  
+var myElementToCheckIfClicksAreInsideOf = document.querySelector('#card1');
+var toolbar = document.getElementById('myDIV');
+// Listen for click events on body
+document.body.addEventListener('click', function (event) {
+    if (myElementToCheckIfClicksAreInsideOf.contains(event.target)) {
+      toolbar.style.display = 'block'; 
+    } else {
+      toolbar.style.display = 'none';
+    }
+});
+
+// jQuery(function($){
+//   $('#foo').click(function(e){
+//     console.log( 'clicked on div' );
+//     e.stopPropagation(); // Prevent bubbling
+//   });
+//   $('body').click(function(e){
+//     console.log( 'clicked outside of div' );
+//   });
+// });
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 70;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      context.fillStyle = 'green';
+      context.fill();
+      context.lineWidth = 5;
+      context.strokeStyle = '#003300';
+      context.stroke();
+
+
+    
+  var canvas2 = document.getElementById('canvasrect');
+  if (canvas2.getContext) {
+    var ctx2 = canvas2.getContext('2d');
+
+    ctx2.fillRect(25, 25, 100, 100);
+    ctx2.clearRect(45, 45, 60, 60);
+    ctx2.strokeRect(50, 50, 50, 50);
+  }
+   
+
+  var drawing = document.getElementById("drawing");
+  var con = drawing.getContext("2d");
+  //clear background
+  con.fillStyle = "white";
+  con.fillRect(0,0, 200, 200);
+  // draw font in red
+  con.fillStyle = "red";
+  con.font = "20pt sans-serif";
+  con.fillText("Canvas Rocks!", 5, 100);
+  con.strokeText("Canvas Rocks!", 5, 130);
+  
+  
+                    </script>
+    </body>
+
+</html>

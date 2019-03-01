@@ -1,0 +1,143 @@
+<html>
+    <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <style>
+                    .cards{
+                        border:1px solid black;
+                        height:300px;
+                        width:300px;
+                    }
+                    .headerdiv{
+                        height: 50px;
+                        background-color:red;
+                    }
+                    .column1{
+                        width:30%;
+                        height: 50vh;
+                    }
+                </style>
+    </head>
+    
+    <body>
+        <div class="container-fluid" id="movablearea" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+             <div class="row">
+                  <div class="column1">  
+                    
+                      <div id="movablecard" class="cards" draggable="true" ondragstart="drag(event)"  >
+                        <div class="headerdiv">
+
+                          </div>
+                          <canvas id="myCanvas" width="300" height="200"></canvas>
+                      </div>   
+                  </div>   
+                   <div class="column1">  
+                   </div>  
+                   <div class="column1">
+                         
+                    
+                                <div id="movablecard3" class="cards" draggable="true" ondragstart="drag(event)"  >
+                                  <div class="headerdiv">
+          
+                                    </div>
+                                    <canvas id="drawing" width="200" height="200"></canvas>
+                                </div>   
+                           
+                       
+                    </div>  
+                           
+                    
+                        
+              </div>      
+             
+          <div class="row">
+              <div class="column1">  
+                    
+                      <div id="movablecard2" class="cards" draggable="true" ondragstart="drag(event)"  >
+                              <div class="headerdiv">
+      
+                                </div>
+                                 <canvas id="canvasrect" width="298" height="247" >
+                                  Your browser does not support the HTML5 canvas tag.</canvas>
+                            </div>  
+                  
+              
+              </div>   
+               
+              <div class="column1">  
+                </div>  
+                   
+              <div class="column1">  
+                      
+                           
+                          
+                      
+            </div>         
+                               
+           </div>
+                        
+                    
+              
+             
+        </div>     
+            
+            <script>
+                    function allowDrop(ev) {
+                      ev.preventDefault();
+                    }
+                    
+                    function drag(ev) {
+                      ev.dataTransfer.setData("text", ev.target.id);
+                    }
+                    
+                    function drop(ev) {
+                      ev.preventDefault();
+                      var data = ev.dataTransfer.getData("text");
+                      ev.target.appendChild(document.getElementById(data));
+                    }
+
+
+
+                    
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 70;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      context.fillStyle = 'green';
+      context.fill();
+      context.lineWidth = 5;
+      context.strokeStyle = '#003300';
+      context.stroke();
+
+
+    
+  var canvas2 = document.getElementById('canvasrect');
+  if (canvas2.getContext) {
+    var ctx2 = canvas2.getContext('2d');
+
+    ctx2.fillRect(25, 25, 100, 100);
+    ctx2.clearRect(45, 45, 60, 60);
+    ctx2.strokeRect(50, 50, 50, 50);
+  }
+   
+
+  var drawing = document.getElementById("drawing");
+  var con = drawing.getContext("2d");
+  //clear background
+  con.fillStyle = "white";
+  con.fillRect(0,0, 200, 200);
+  // draw font in red
+  con.fillStyle = "red";
+  con.font = "20pt sans-serif";
+  con.fillText("Canvas Rocks!", 5, 100);
+  con.strokeText("Canvas Rocks!", 5, 130);
+  
+  
+                    </script>
+    </body>
+
+</html>
