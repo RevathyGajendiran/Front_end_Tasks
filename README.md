@@ -1,2 +1,2 @@
 # Front_end_Tasks
-All my front end related works
+This repository containes Front End practice session tasks.
